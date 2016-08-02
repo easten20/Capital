@@ -7,6 +7,7 @@ $params = array_merge(
 );
 
 return [
+    'name' => 'Capital-Lighting',
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
@@ -31,6 +32,7 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
+	
     ],
     'params' => $params,
 ];
