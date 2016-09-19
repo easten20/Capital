@@ -3,7 +3,7 @@
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use common\components\Helpers;
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 /* @var $form yii\widgets\ActiveForm */
@@ -16,8 +16,10 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
 
     <?=$form->field($model, 'brandTypeId')->dropDownList($dataCategoryBrand, ['prompt' => '--Choose a Brand--'])?>
 
-    <?=$form->field($model, 'categoryId')->dropDownList($dataCategoryCategories, ['prompt' => '--Choose a Category--'])?>
-
+    <?=$form->field($model, 'categoryId')->dropDownList($dataCategoryCategories, ['prompt' => '--Choose a Category--'])?>    
+    <div id="tree">
+      <?= Helpers::categoryTreeBuild(); ?>
+    </div>
     <?=$form->field($model, 'itemNo')->textInput(['maxlength' => true])?>
 
     <?=$form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className())?>
@@ -123,3 +125,20 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
     <?php ActiveForm::end();?>
 
 </div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#tree").jstree({
+        "checkbox": {
+            "keep_selected_style": false
+        },
+            "plugins": ["checkbox"]
+    });
+    $("#tree").bind("changed.jstree",
+    function (e, data) {
+        alert("Checked: " + data.node.id);
+        alert("Parent: " + data.node.parent); 
+        //alert(JSON.stringify(data));
+    });
+});
+</script>
