@@ -39,7 +39,7 @@ $this->registerMetaTag([
         </div>
         <div class="col-lg-7">
             <div class="ohidden" data-height-lg="426" data-height-md="567" data-height-sm="470" data-height-xs="287" data-height-xxs="183" style="position: relative; margin-bottom: -60px;">
-                <img alt="Chrome" data-animate="fadeInUp" data-delay="100" src="<?= Url::to($home_1->image_1, true); ?>" style="position: absolute; top: 0; left: 0;">
+                <img alt="Lighting" data-animate="fadeInUp" data-delay="100" src="<?= Url::to($home_1->image_1, true); ?>" style="position: absolute; top: 0; left: 0; height: 100%;">
                 </img>
             </div>
         </div>
@@ -59,7 +59,7 @@ $this->registerMetaTag([
 
     <article class="portfolio-item pf-media pf-icons">
         <div class="portfolio-image">
-            <a href="portfolio-single.html">                
+            <a href="#">                
                 <img alt="Open Imagination" src="<?= Url::to($item->thumbnail, true); ?>">
                 </img>
             </a>
@@ -101,7 +101,7 @@ $this->registerMetaTag([
 </div>
 <div class="clear">
 </div>
-<a class="button button-full button-dark center tright bottommargin-lg" href="portfolio.html">
+<a class="button button-full button-dark center tright bottommargin-lg" href="#">
     <div class="container clearfix">
         Specialized lighting design for fine architectures
     </div>
