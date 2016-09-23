@@ -26,8 +26,8 @@ if (isset($isTransparent)) {?>
 					<!-- Logo
 					============================================= -->
 					<div id="logo">
-						<a href="index.html" class="standard-logo" data-dark-logo="<?=Url::to('@web/images/capital/logo_capital_dark_small.png', true);?>"><img src="<?=Url::to('@web/images/capital/logo_capital_small.png', true);?>" alt="Canvas Logo"></a>
-						<a href="index.html" class="retina-logo" data-dark-logo="<?=Url::to('@web/images/capital/logo_capital_dark_2X.png', true);?>"><img src="<?=Url::to('@web/images/capital/logo_capital_small.png', true);?>" alt="Canvas Logo"></a>
+						<a href="#" class="standard-logo" data-dark-logo="<?=Url::to('@web/images/capital/logo_capital_dark_small.png', true);?>"><img src="<?=Url::to('@web/images/capital/logo_capital_small.png', true);?>" alt="Capital Lighting Logo"></a>
+						<a href="'#" class="retina-logo" data-dark-logo="<?=Url::to('@web/images/capital/logo_capital_dark_2X.png', true);?>"><img src="<?=Url::to('@web/images/capital/logo_capital_small.png', true);?>" alt="Capital Lighting Logo"></a>
 					</div><!-- #logo end -->
 
 					<!-- Primary Navigation
