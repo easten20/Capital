@@ -31,7 +31,7 @@ $this->registerMetaTag([
 
 							<div class="product">
 
-								<div class="col_half">
+								<div class="col-md-6">
 
 									<!-- Product Single - Gallery
 									============================================= -->
@@ -72,7 +72,7 @@ $this->registerMetaTag([
 
 								</div>
 
-								<div class="col_half col_last product-desc">
+								<div class="col-md-6 col_last product-desc">
 
 
 									<div class="clear"></div>
