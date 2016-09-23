@@ -73,13 +73,11 @@ $this->registerMetaTag([
                         <address>
                             <strong>Jakarta Pusat</strong><br>
                             Jalan Kramat Raya 101<br>
-                            Plaza Kenari Mas LG B33<br>
-                            (021) 3984-1954<br>
+                            Plaza Kenari Mas LG B33<br>                            
                         </address>
                         <address>
                             <strong>Jakarta Selatan</strong><br>
-                            Jalan RS Fatmawati No. 3D<br>                            
-                            (021) 739-2743 / (021) 2905-4728<br>
+                            Jalan RS Fatmawati No. 3D<br>                                                        
                         </address>  
                         <address>
                             <strong>Tangerang</strong><br>
@@ -91,14 +89,15 @@ $this->registerMetaTag([
 
 </div>
 
-<script src="http://maps.googleapis.com/maps/api/js">
-</script>
+
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARj4PlZLhSWMd4_2I4A2kpoaZKP1X9F18&callback=initialize"
+  type="text/javascript"></script>
 
 <script>
-var myCenter=new google.maps.LatLng(-6.18390, 106.70639);
 
 function initialize()
 {
+var myCenter=new google.maps.LatLng(-6.18390, 106.70639);
 var mapProp = {
   center:myCenter,
   zoom:11,
@@ -120,5 +119,5 @@ var infowindow = new google.maps.InfoWindow({
 infowindow.open(map,marker);
 }
 
-google.maps.event.addDomListener(window, 'load', initialize);
+//google.maps.event.addDomListener(window, 'load', initialize);
 </script>
