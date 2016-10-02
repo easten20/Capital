@@ -11,8 +11,6 @@ $this->title = 'Portfolios';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="portfolio-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -24,15 +22,13 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
             'location',            
-             [
-            'attribute' => 'thumbnail',
-            'value' => 'thumbnail',
-            'format' => ['image', ['height' => '200']],
-            ],
+            //[
+            //'attribute' => 'thumbnail',
+            //'value' => 'thumbnail',
+            //'format' => ['image', ['height' => '200']],
+            //],
             //'image_1',
             // 'image_2',
             // 'image_3',

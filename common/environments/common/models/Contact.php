@@ -13,30 +13,29 @@ use Yii;
  * @property string $subject
  * @property string $body
  */
-class Contact extends \yii\db\ActiveRecord
-{
-     public $verifyCode;
-     
+class Contact extends \yii\db\ActiveRecord {
+
+    public $verifyCode;
+
     /**
      * @inheritdoc
      */
-    public static function tableName()
-    {
+    public static function tableName() {
         return 'contact';
     }
 
     /**
      * @inheritdoc
      */
-    public function rules()
-    {
-        return [                    
+    public function rules() {
+        return [
             [['body'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['subject'], 'string', 'max' => 516],
-             // verifyCode needs to be entered correctly
+            // verifyCode needs to be entered correctly
             ['verifyCode', 'captcha'],
             ['email', 'email'],
+            [['is_readed'], 'string', 'max' => 1],
             [['name', 'email', 'subject', 'body'], 'required'],
         ];
     }
@@ -44,14 +43,14 @@ class Contact extends \yii\db\ActiveRecord
     /**
      * @inheritdoc
      */
-    public function attributeLabels()
-    {
+    public function attributeLabels() {
         return [
             'id' => 'ID',
             'name' => 'Name',
             'email' => 'Email',
             'subject' => 'Subject',
             'body' => 'Body',
+            'is_readed' => 'Readed',
             'verifyCode' => 'Verification Code',
         ];
     }
@@ -60,8 +59,8 @@ class Contact extends \yii\db\ActiveRecord
      * @inheritdoc
      * @return ContactQuery the active query used by this AR class.
      */
-    public static function find()
-    {
+    public static function find() {
         return new ContactQuery(get_called_class());
     }
+    
 }

@@ -1,21 +1,22 @@
 <?php
+
 use yii\helpers\Html;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
+$main_login = ['login', 'request-password-reset', 'reset-password'];
 
-if (Yii::$app->controller->action->id === 'login') { 
-/**
- * Do not use this code in your template. Remove it. 
- * Instead, use the code  $this->layout = '//main-login'; in your controller.
- */
+if (in_array(Yii::$app->controller->action->id, $main_login)) {
+    
+    /**
+     * Do not use this code in your template. Remove it. 
+     * Instead, use the code  $this->layout = '//main-login'; in your controller.
+     */
     echo $this->render(
-        'main-login',
-        ['content' => $content]
+            'main-login', ['content' => $content]
     );
 } else {
-
     if (class_exists('backend\assets\AppAsset')) {
         backend\assets\AppAsset::register($this);
     } else {
@@ -29,40 +30,42 @@ if (Yii::$app->controller->action->id === 'login') {
     <?php $this->beginPage() ?>
     <!DOCTYPE html>
     <html lang="<?= Yii::$app->language ?>">
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-        <meta charset="<?= Yii::$app->charset ?>"/>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?= Html::csrfMetaTags() ?>
-        <title><?= Html::encode($this->title) ?></title>
-        <?php $this->head() ?>
-    </head>
-    <body class="hold-transition skin-blue sidebar-mini">
-    <?php $this->beginBody() ?>
-    <div class="wrapper">
+        <head>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+            <meta charset="<?= Yii::$app->charset ?>"/>
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <?= Html::csrfMetaTags() ?>
+            <title><?= Html::encode($this->title) ?></title>
+            <?php $this->head() ?>
+        </head>
+        <body class="hold-transition skin-blue sidebar-mini">
+            <?php $this->beginBody() ?>
+            <div class="wrapper">
 
-        <?= $this->render(
-            'header.php',
-            ['directoryAsset' => $directoryAsset]
-        ) ?>
+                <?=
+                $this->render(
+                        'header.php', ['directoryAsset' => $directoryAsset]
+                )
+                ?>
 
-        <?= $this->render(
-            'left.php',
-            ['directoryAsset' => $directoryAsset]
-        )
-        ?>
+                <?=
+                $this->render(
+                        'left.php', ['directoryAsset' => $directoryAsset]
+                )
+                ?>
 
-        <?= $this->render(
-            'content.php',
-            ['content' => $content, 'directoryAsset' => $directoryAsset]
-        ) ?>
+                <?=
+                $this->render(
+                        'content.php', ['content' => $content, 'directoryAsset' => $directoryAsset]
+                )
+                ?>
 
-    </div>
+            </div>
 
-    <?php $this->endBody() ?>
-    </body>
+            <?php $this->endBody() ?>
+        </body>
     </html>
     <?php $this->endPage() ?>
 <?php } ?>

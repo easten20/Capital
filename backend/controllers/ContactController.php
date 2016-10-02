@@ -13,18 +13,17 @@ use yii\filters\AccessControl;
 /**
  * ContactController implements the CRUD actions for Contact model.
  */
-class ContactController extends Controller
-{
-    public function behaviors()
-    {
+class ContactController extends Controller {
+
+    public function behaviors() {
         return [
-         'access' => [
-                'class' => AccessControl::className(),                
+            'access' => [
+                'class' => AccessControl::className(),
                 'rules' => [
-                    [                        
+                    [
                         'allow' => true,
                         'roles' => ['@'],
-                    ],                    
+                    ],
                 ],
             ],
             'verbs' => [
@@ -40,14 +39,13 @@ class ContactController extends Controller
      * Lists all Contact models.
      * @return mixed
      */
-    public function actionIndex()
-    {
+    public function actionIndex() {
         $searchModel = new ContactSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
         ]);
     }
 
@@ -56,13 +54,26 @@ class ContactController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionView($id)
-    {
+    public function actionView($id) {
+        $model = $this->findModel($id);
+        $model->is_readed = '1';
+        $model->save();
         return $this->render('view', [
-            'model' => $this->findModel($id),
+                    'model' => $model,
         ]);
     }
 
+    public function actionUpdate($id) {
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect(['view', 'id' => $model->id]);
+        } else {
+            return $this->render('update', [
+                        'model' => $model,
+            ]);
+        }
+    }
 
     /**
      * Deletes an existing Contact model.
@@ -70,8 +81,7 @@ class ContactController extends Controller
      * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id)
-    {
+    public function actionDelete($id) {
         $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
@@ -84,12 +94,12 @@ class ContactController extends Controller
      * @return Contact the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Contact::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
 }

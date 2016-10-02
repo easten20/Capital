@@ -1,11 +1,16 @@
 <?php
 return [
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+        ]
+    ],
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=capital',
             'username' => 'root',
-            'password' => 'password',
+            'password' => '',
            //'dsn' => 'mysql:host=localhost;dbname=timurweb_capital', // db and username www.timur.web.id
             //'username' => 'timurweb_capital',
             //'password' => 'P@ssw0rd',
@@ -17,10 +22,16 @@ return [
         'mailer' => [
             'class' => 'yii\swiftmailer\Mailer',
             'viewPath' => '@common/mail',
-            // send all mails to a file by default. You have to set
-            // 'useFileTransport' to false and configure a transport
-            // for the mailer to send real emails.
-            'useFileTransport' => true,
+            'transport' => [
+                'class' => 'Swift_SmtpTransport',
+                'host' => 'smtp.mail.yahoo.com',
+                'username' => 'priya_nugraha91@yahoo.com',
+                'password' => '44444444',
+                'port' => '465',
+                'encryption' => 'ssl',
+            ],
+            'useFileTransport' => false,
         ],
+        
     ],
 ];

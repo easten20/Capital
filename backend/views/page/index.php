@@ -11,8 +11,6 @@ $this->title = 'Pages';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <p>
@@ -24,16 +22,14 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-
-            'id',
             'name',
             'title',
             'description:ntext', 
-             [
-            'attribute' => 'image_1',
-            'value' => 'image_1',
-            'format' => ['image', ['height' => '200']],
-            ],
+            //[
+            //'attribute' => 'image_1',
+            //'value' => 'image_1',
+            //'format' => ['image', ['height' => '200']],
+            //],
             ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
         ],
     ]); ?>

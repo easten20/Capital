@@ -50,6 +50,21 @@ class BrandtypeController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+    
+    /**
+     * Lists all BrandType models.
+     * @return mixed
+     */
+    public function actionIndexCategory()
+    {
+        $searchModel = new brandTypeSearch();
+        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+
+        return $this->render('index_category', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
 
     /**
      * Displays a single BrandType model.

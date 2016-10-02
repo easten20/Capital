@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.5.1
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: Sep 19, 2016 at 11:52 PM
--- Server version: 5.5.46-0ubuntu0.14.04.2
--- PHP Version: 5.6.20-1+deb.sury.org~trusty+1
+-- Host: 127.0.0.1
+-- Generation Time: 02 Okt 2016 pada 13.09
+-- Versi Server: 10.1.10-MariaDB
+-- PHP Version: 7.0.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -14,7 +14,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `capital`
@@ -23,32 +23,34 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `brandType`
+-- Struktur dari tabel `brandtype`
 --
 
-CREATE TABLE IF NOT EXISTS `brandType` (
+DROP TABLE IF EXISTS `brandtype`;
+CREATE TABLE IF NOT EXISTS `brandtype` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `brandName` varchar(255) NOT NULL,
   `description` text,
   `image_1` varchar(256) DEFAULT NULL,
   `logo` varchar(512) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `brandType`
+-- Dumping data untuk tabel `brandtype`
 --
 
-INSERT INTO `brandType` (`id`, `brandName`, `description`, `image_1`, `logo`) VALUES
-(1, 'KWT', 'Description for KWT here 1', '/backend/web/uploads/brand/kwt/kwt_1.jpg', '/backend/web/uploads/brand/kwt/kwt_1.png'),
+INSERT INTO `brandtype` (`id`, `brandName`, `description`, `image_1`, `logo`) VALUES
+(1, 'KWT', 'Description for KWT here 11', '/backend/web/uploads/brand/kwt/kwt_1.jpg', '/backend/web/uploads/brand/kwt/kwt_1.png'),
 (2, 'Crescent', 'Description for Crescent here 1', '/backend/web/uploads/brand/crescent/crescent_1.jpg', '/backend/web/uploads/brand/crescent/crescent_1.png');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `category`
+-- Struktur dari tabel `category`
 --
 
+DROP TABLE IF EXISTS `category`;
 CREATE TABLE IF NOT EXISTS `category` (
   `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
@@ -59,7 +61,7 @@ CREATE TABLE IF NOT EXISTS `category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `category`
+-- Dumping data untuk tabel `category`
 --
 
 INSERT INTO `category` (`id`, `name`, `parentId`, `description`) VALUES
@@ -80,9 +82,26 @@ INSERT INTO `category` (`id`, `name`, `parentId`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `cofounder`
+-- Struktur dari tabel `categoryproduct`
 --
 
+DROP TABLE IF EXISTS `categoryproduct`;
+CREATE TABLE IF NOT EXISTS `categoryproduct` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `productId` int(11) DEFAULT NULL,
+  `categoryId` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK__product` (`productId`),
+  KEY `FK__category` (`categoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `cofounder`
+--
+
+DROP TABLE IF EXISTS `cofounder`;
 CREATE TABLE IF NOT EXISTS `cofounder` (
   `id` int(11) NOT NULL DEFAULT '0',
   `name` varchar(256) NOT NULL,
@@ -92,7 +111,7 @@ CREATE TABLE IF NOT EXISTS `cofounder` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `cofounder`
+-- Dumping data untuk tabel `cofounder`
 --
 
 INSERT INTO `cofounder` (`id`, `name`, `description`, `image_1`) VALUES
@@ -103,31 +122,61 @@ INSERT INTO `cofounder` (`id`, `name`, `description`, `image_1`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `contact`
+-- Struktur dari tabel `contact`
 --
 
+DROP TABLE IF EXISTS `contact`;
 CREATE TABLE IF NOT EXISTS `contact` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
   `subject` varchar(516) DEFAULT NULL,
   `body` text,
+  `is_readed` enum('0','1') DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `contact`
+-- Dumping data untuk tabel `contact`
 --
 
-INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `body`) VALUES
-(4, 'test', 'test@hotmail.com', 'tset', 'test');
+INSERT INTO `contact` (`id`, `name`, `email`, `subject`, `body`, `is_readed`) VALUES
+(2, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'edwdfwfw', '0'),
+(3, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'kampret', '0'),
+(4, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(5, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(6, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(7, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(8, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(9, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(10, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah', '0'),
+(11, 'Priya Nugraha', 'piyo@tonjoo.com', 'Coba', 'Coba, bismilah 2', '0');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `migration`
+-- Struktur dari tabel `menu`
 --
 
+DROP TABLE IF EXISTS `menu`;
+CREATE TABLE IF NOT EXISTS `menu` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(128) DEFAULT NULL,
+  `parent` int(11) DEFAULT NULL,
+  `route` varchar(256) DEFAULT NULL,
+  `order` int(11) DEFAULT NULL,
+  `data` blob,
+  PRIMARY KEY (`id`),
+  KEY `parent` (`parent`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `migration`
+--
+
+DROP TABLE IF EXISTS `migration`;
 CREATE TABLE IF NOT EXISTS `migration` (
   `version` varchar(180) NOT NULL,
   `apply_time` int(11) DEFAULT NULL,
@@ -135,7 +184,7 @@ CREATE TABLE IF NOT EXISTS `migration` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `migration`
+-- Dumping data untuk tabel `migration`
 --
 
 INSERT INTO `migration` (`version`, `apply_time`) VALUES
@@ -145,9 +194,10 @@ INSERT INTO `migration` (`version`, `apply_time`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `page`
+-- Struktur dari tabel `page`
 --
 
+DROP TABLE IF EXISTS `page`;
 CREATE TABLE IF NOT EXISTS `page` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
@@ -156,14 +206,14 @@ CREATE TABLE IF NOT EXISTS `page` (
   `image_1` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `page`
+-- Dumping data untuk tabel `page`
 --
 
 INSERT INTO `page` (`id`, `name`, `title`, `description`, `image_1`) VALUES
-(1, 'aboutus', 'About Us', 'Capital was established in 2009, which started as an electrical supplies wholesaler based in Jakarta. We serve commercial, industrial and residential contractors as well as retail customers throughout Indonesia. In 2012, we embarked on an LED Lighting journey, committed to providing an extensive range of energy efficient , environmentally friendly lighting. Today, Capital has grown to be an innovative provider of LED architectural lighting solutions serving a wide variety of project applications. Our core market segments include lighting solutions for shopping centres, Multi-Chain Fashion & Speciality Retail, Supermarkets, Hotels, Restaurants & Bars, Commercial Offices and Residential Luxury & Multi-Dwelling. We have partnered with some of the world’s leading LED manufacturers to ensure the design and integration of high quality products, with competitive pricing, with up to a 5-year warranty. Out stores and showrooms are conveniently located in Central, South, West Jakarta and Alam Sutera. Customers can drop by one of our stores and showrooms to inquire about our products and services.', ''),
+(1, 'aboutus', 'About Us', 'Capital was established in 2009, which started as an electrical supplies wholesaler based in Jakarta. We serve commercial, industrial and residential contractors as well as retail customers throughout Indonesia. In 2012, we embarked on an LED Lighting journey, committed to providing an extensive range of energy efficient , environmentally friendly lighting. Today, Capital has grown to be an innovative provider of LED architectural lighting solutions serving a wide variety of project applications. Our core market segments include lighting solutions for shopping centres, Multi-Chain Fashion & Speciality Retail, Supermarkets, Hotels, Restaurants & Bars, Commercial Offices and Residential Luxury & Multi-Dwelling. We have partnered with some of the worldï¿½s leading LED manufacturers to ensure the design and integration of high quality products, with competitive pricing, with up to a 5-year warranty. Out stores and showrooms are conveniently located in Central, South, West Jakarta and Alam Sutera. Customers can drop by one of our stores and showrooms to inquire about our products and services.', ''),
 (2, 'slider_1', 'WELCOME TO CAPITAL', 'fine architecture lighting', '/backend/web/uploads/page/slider_1/slider_1_1.jpg'),
 (3, 'slider_2', 'BEAUTIFULLY FLEXIBLE', '', '/backend/web/uploads/page/slider_2/slider_2_1.jpg'),
 (4, 'slider_3', 'GREAT PERFORMANCE', 'The perfect choice for grandious performance', '/backend/web/uploads/page/slider_3/slider_3_1.jpg'),
@@ -173,9 +223,10 @@ INSERT INTO `page` (`id`, `name`, `title`, `description`, `image_1`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `portfolio`
+-- Struktur dari tabel `portfolio`
 --
 
+DROP TABLE IF EXISTS `portfolio`;
 CREATE TABLE IF NOT EXISTS `portfolio` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(256) NOT NULL,
@@ -185,10 +236,10 @@ CREATE TABLE IF NOT EXISTS `portfolio` (
   `image_2` varchar(255) DEFAULT NULL,
   `image_3` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `portfolio`
+-- Dumping data untuk tabel `portfolio`
 --
 
 INSERT INTO `portfolio` (`id`, `name`, `location`, `thumbnail`, `image_1`, `image_2`, `image_3`) VALUES
@@ -204,9 +255,10 @@ INSERT INTO `portfolio` (`id`, `name`, `location`, `thumbnail`, `image_1`, `imag
 -- --------------------------------------------------------
 
 --
--- Table structure for table `product`
+-- Struktur dari tabel `product`
 --
 
+DROP TABLE IF EXISTS `product`;
 CREATE TABLE IF NOT EXISTS `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `brandTypeId` int(11) NOT NULL,
@@ -231,10 +283,10 @@ CREATE TABLE IF NOT EXISTS `product` (
   KEY `brandTypeId` (`brandTypeId`),
   KEY `brandTypeId_2` (`brandTypeId`),
   KEY `categoryId` (`categoryId`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=26 ;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `product`
+-- Dumping data untuk tabel `product`
 --
 
 INSERT INTO `product` (`id`, `brandTypeId`, `categoryId`, `itemNo`, `description`, `power`, `luminous`, `cri`, `pfc`, `cutout`, `angle`, `ledChip`, `dimension`, `image_1`, `image_2`, `image_3`, `image_4`, `image_5`) VALUES
@@ -263,9 +315,65 @@ INSERT INTO `product` (`id`, `brandTypeId`, `categoryId`, `itemNo`, `description
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user`
+-- Struktur dari tabel `tree`
 --
 
+DROP TABLE IF EXISTS `tree`;
+CREATE TABLE IF NOT EXISTS `tree` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `root` int(11) DEFAULT NULL,
+  `lft` int(11) NOT NULL,
+  `rgt` int(11) NOT NULL,
+  `lvl` smallint(5) NOT NULL,
+  `name` varchar(60) NOT NULL,
+  `icon` varchar(255) DEFAULT NULL,
+  `icon_type` tinyint(1) NOT NULL DEFAULT '1',
+  `active` tinyint(1) NOT NULL DEFAULT '1',
+  `selected` tinyint(1) NOT NULL DEFAULT '0',
+  `disabled` tinyint(1) NOT NULL DEFAULT '0',
+  `readonly` tinyint(1) NOT NULL DEFAULT '0',
+  `visible` tinyint(1) NOT NULL DEFAULT '1',
+  `collapsed` tinyint(1) NOT NULL DEFAULT '0',
+  `movable_u` tinyint(1) NOT NULL DEFAULT '1',
+  `movable_d` tinyint(1) NOT NULL DEFAULT '1',
+  `movable_l` tinyint(1) NOT NULL DEFAULT '1',
+  `movable_r` tinyint(1) NOT NULL DEFAULT '1',
+  `removable` tinyint(1) NOT NULL DEFAULT '1',
+  `removable_all` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  KEY `tbl_product_NK1` (`root`),
+  KEY `tbl_product_NK2` (`lft`),
+  KEY `tbl_product_NK3` (`rgt`),
+  KEY `tbl_product_NK4` (`lvl`),
+  KEY `tbl_product_NK5` (`active`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data untuk tabel `tree`
+--
+
+INSERT INTO `tree` (`id`, `root`, `lft`, `rgt`, `lvl`, `name`, `icon`, `icon_type`, `active`, `selected`, `disabled`, `readonly`, `visible`, `collapsed`, `movable_u`, `movable_d`, `movable_l`, `movable_r`, `removable`, `removable_all`) VALUES
+(1, 1, 1, 10, 0, 'Indoor', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(2, 2, 1, 16, 0, 'Outdoor', '', 2, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(3, 1, 2, 3, 1, 'Downlight', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(4, 1, 4, 5, 1, 'Tracklight', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(5, 1, 6, 7, 1, 'Retrofit', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(6, 2, 2, 9, 1, 'Landscape', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(7, 2, 10, 15, 1, 'Industrial', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(8, 2, 3, 4, 2, 'Ceiling', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(9, 2, 5, 6, 2, 'Wall', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(10, 2, 7, 8, 2, 'Inground', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(11, 2, 11, 12, 2, 'Roadlight', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(12, 2, 13, 14, 2, 'Floodlight', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0),
+(13, 1, 8, 9, 1, 'High Bay', '', 1, 1, 0, 0, 0, 1, 0, 1, 1, 1, 1, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `user`
+--
+
+DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
@@ -280,31 +388,44 @@ CREATE TABLE IF NOT EXISTS `user` (
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
--- Dumping data for table `user`
+-- Dumping data untuk tabel `user`
 --
 
 INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'easten', '2hcB6AnuwyCMbu3xS91bnXQNSr--nodl', '$2y$13$tvePnnzib5rSwbizQ1SOeu4qGxrT/CSOi76MkV/vFC8EPNN0mcvZO', NULL, 'timur.wiradarma@outlook.com', 10, 1455166562, 1474303927),
-(2, 'administrator', 'BdNjGbRs_0wA6JPJlEKjP_yX3i7b9qNt', '$2y$13$zJePhdfB4NuouNPn6ucAreNnmEMmavTilYNHR8cYWUYl9lWllRpWC', NULL, 'info@capitalelectric.co.id', 10, 1462119141, 1462119141);
+(1, 'easten', '2hcB6AnuwyCMbu3xS91bnXQNSr--nodl', '$2y$13$Vir0rG4szFKxZRWzsORUTeZjkQizQqnrqNJoSDSHU7rYo.i8qAsuy', 'T8TeybwVZp52l3HrtIVY1X2M6ldEtOpv_1475312662', 'priya.nugraha91@gmail.com', 10, 1455166562, 1475312662),
+(2, 'administrator', 'BdNjGbRs_0wA6JPJlEKjP_yX3i7b9qNt', '$2y$13$MJrgXTMENd8NQkPZy/tuEumJGPj47gGgyfTFPI/URewedQ9aHgX7K', NULL, 'priya_nugraha91@yahoo.com', 10, 1462119141, 1475405057);
 
 --
--- Constraints for dumped tables
+-- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
 
 --
--- Constraints for table `category`
+-- Ketidakleluasaan untuk tabel `category`
 --
 ALTER TABLE `category`
   ADD CONSTRAINT `fk_parentid_id` FOREIGN KEY (`parentId`) REFERENCES `category` (`id`);
 
 --
--- Constraints for table `product`
+-- Ketidakleluasaan untuk tabel `categoryproduct`
+--
+ALTER TABLE `categoryproduct`
+  ADD CONSTRAINT `FK__category` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK__product` FOREIGN KEY (`productId`) REFERENCES `product` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `menu`
+--
+ALTER TABLE `menu`
+  ADD CONSTRAINT `menu_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `menu` (`id`) ON DELETE SET NULL ON UPDATE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `product`
 --
 ALTER TABLE `product`
-  ADD CONSTRAINT `fk_brandType_product` FOREIGN KEY (`brandTypeId`) REFERENCES `brandType` (`id`),
+  ADD CONSTRAINT `fk_brandType_product` FOREIGN KEY (`brandTypeId`) REFERENCES `brandtype` (`id`),
   ADD CONSTRAINT `fk_category_produćt` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

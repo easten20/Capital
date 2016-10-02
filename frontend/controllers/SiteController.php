@@ -1,4 +1,5 @@
 <?php
+
 namespace frontend\controllers;
 
 use Yii;
@@ -14,23 +15,22 @@ use common\models\PortfolioSearch;
 use common\models\PageSearch;
 use common\models\Cofounder;
 
-
 /**
  * Site controller
  */
-class SiteController extends Controller
-{
+class SiteController extends Controller {
+
     public $description = '';
+
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
-        return [            
+    public function behaviors() {
+        return [
             'verbs' => [
                 'class' => VerbFilter::className(),
                 'actions' => [
-                    //'logout' => ['post'],
+                //'logout' => ['post'],
                 ],
             ],
         ];
@@ -39,8 +39,7 @@ class SiteController extends Controller
     /**
      * @inheritdoc
      */
-    public function actions()
-    {
+    public function actions() {
         return [
             'error' => [
                 'class' => 'yii\web\ErrorAction',
@@ -52,41 +51,57 @@ class SiteController extends Controller
         ];
     }
 
+    public function beforeAction($action) {
+        if (parent::beforeAction($action)) {
+            // change layout for error action
+            if ($action->id == 'error')
+                $this->layout = 'default';
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     /**
      * Displays homepage.
      *
      * @return mixed
      */
-    public function actionIndex()
-    {       
+    public function actionIndex() {
         $searchModel = new PortfolioSearch();
-        $portfolio = $searchModel->search("");                
+        $portfolio = $searchModel->search("");
         $portfolio->pagination = array('pageSize' => 8);
-        $pages = $searchModel->search("");    
-        $cofounders = Cofounder::find()->where([])->all();                    
+        $pages = $searchModel->search("");
+        $cofounders = Cofounder::find()->where([])->all();
         return $this->render('index', [
-            'portfolio' => $portfolio,
-            'pages' => $pages,
-            'cofounders' => $cofounders,
-        ]);        
+                    'portfolio' => $portfolio,
+                    'pages' => $pages,
+                    'cofounders' => $cofounders,
+        ]);
     }
-
 
     /**
      * Displays contact page.
      *
      * @return mixed
      */
-    public function actionContact()
-    {
+    public function actionContact() {
         $this->layout = 'default';
-        $model = new Contact();                        
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {            
-            Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');        
+        $model = new Contact();
+        $model->is_readed = '0';
+
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            Yii::$app->mailer->compose('contact-html', ['contact' => $model])
+                    ->setFrom(['priya_nugraha91@yahoo.com'])
+                    ->setTo('priya.nugraha91@gmail.com')
+                    ->setSubject('You get message in Capital')
+                    ->send();
+            Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             return $this->refresh();
-        } else {            
+        } else {
             return $this->render('contact', [
-                'model' => $model,
+                        'model' => $model,
             ]);
         }
     }
@@ -96,13 +111,12 @@ class SiteController extends Controller
      *
      * @return mixed
      */
-    public function actionAbout()
-    {
-         $this->layout = 'default';
-         $model = Page::findOne(['name' => 'aboutus']); 
+    public function actionAbout() {
+        $this->layout = 'default';
+        $model = Page::findOne(['name' => 'aboutus']);
         return $this->render('about', [
-            'model' => $model,
-            ]);
+                    'model' => $model,
+        ]);
     }
 
     /**
@@ -112,8 +126,7 @@ class SiteController extends Controller
      * @return Page the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id)
-    {
+    protected function findModel($id) {
         if (($model = Page::findOne($id)) !== null) {
             return $model;
         } else {
@@ -121,5 +134,4 @@ class SiteController extends Controller
         }
     }
 
-    
 }
