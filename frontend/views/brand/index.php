@@ -30,7 +30,7 @@ $this->registerMetaTag([
 
   <section id="content">
 						<div class="clearfix">
-						<div class="" style="height:450px; background-image: url('<?=Url::to($model->image_1, true);?>');">
+						<div class="full-screen" style="background-image: url('<?=Url::to($model->image_1, true);?>'); background-size: cover; background-repeat:no-repeat;" data-height-lg="450" data-height-md="400" data-height-sm="300" data-height-xs="200" data-height-xxs="125">
 
 					</div>
 

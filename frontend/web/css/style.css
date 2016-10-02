@@ -5948,7 +5948,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-image > a {
 }
 
 .product-desc {
-	padding: 15px 0;
+	
 	font-size: 14px;
 }
 
@@ -6180,7 +6180,7 @@ body:not(.device-touch):not(.device-xs):not(.device-xxs) .product-overlay a {
 .single-product .product-image,
 .single-product .product-image img { height: auto; }
 
-.single-product .product-desc { padding: 0; }
+.single-product .product-desc { /*padding: 0; */ }
 
 .single-product .product-title h2 {
 	font-size: 28px;

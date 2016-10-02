@@ -55,12 +55,7 @@
                     ]
                 ],
                     // ['label' => 'Change Password', 'icon' => 'fa fa-circle-o', 'url' => ['/site/change-password']],
-            ];
-            $menuItems[] = [
-                    //'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                    //'url' => ['/site/logout'],
-                    //'linkOptions' => ['data-method' => 'post']
-            ];
+            ];            
         }
         ?>
 
