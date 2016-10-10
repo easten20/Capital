@@ -31,11 +31,11 @@ class Contact extends \yii\db\ActiveRecord
     public function rules()
     {
         return [                    
-            [['body'], 'string'],
+            [['body', 'is_readed'], 'string'],
             [['name'], 'string', 'max' => 255],
             [['subject'], 'string', 'max' => 516],
              // verifyCode needs to be entered correctly
-            ['verifyCode', 'captcha'],
+            ['verifyCode', 'captcha', 'on'  => 'register'],
             ['email', 'email'],
             [['name', 'email', 'subject', 'body'], 'required'],
         ];

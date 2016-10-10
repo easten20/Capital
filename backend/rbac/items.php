@@ -14,6 +14,7 @@ return [
             '/product/*',
             '/site/*',
             '/treemanager/*',
+            '/email/*',
         ],
     ],
     '/admin/*' => [
@@ -266,5 +267,23 @@ return [
             '/brandtype/*',
             '/treemanager/*',
         ],
+    ],
+    '/email/index' => [
+        'type' => 2,
+    ],
+    '/email/view' => [
+        'type' => 2,
+    ],
+    '/email/create' => [
+        'type' => 2,
+    ],
+    '/email/update' => [
+        'type' => 2,
+    ],
+    '/email/delete' => [
+        'type' => 2,
+    ],
+    '/email/*' => [
+        'type' => 2,
     ],
 ];

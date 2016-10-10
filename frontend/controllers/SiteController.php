@@ -14,6 +14,7 @@ use common\models\Contact;
 use common\models\PortfolioSearch;
 use common\models\PageSearch;
 use common\models\Cofounder;
+use common\models\Email;
 
 /**
  * Site controller
@@ -89,14 +90,15 @@ class SiteController extends Controller {
         $this->layout = 'default';
         $model = new Contact();
         $model->is_readed = '0';
-
+        $email = Email::findAll(['get_info' => '1']);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            
-            Yii::$app->mailer->compose('contact-html', ['contact' => $model])
-                    ->setFrom(['priya_nugraha91@yahoo.com'])
-                    ->setTo('priya.nugraha91@gmail.com')
-                    ->setSubject('You get message in Capital')
-                    ->send();
+            foreach ($email as $v) {
+                Yii::$app->mailer->compose('contact-html', ['contact' => $model])
+                        ->setFrom(['priya_nugraha91@yahoo.com'])
+                        ->setTo($v->email)
+                        ->setSubject('You get message in Capital')
+                        ->send();
+            }
             Yii::$app->session->setFlash('success', 'Thank you for contacting us. We will respond to you as soon as possible.');
             return $this->refresh();
         } else {

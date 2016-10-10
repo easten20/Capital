@@ -55,7 +55,7 @@ class ContactController extends Controller {
      * @return mixed
      */
     public function actionView($id) {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id); 
         $model->is_readed = '1';
         $model->save();
         return $this->render('view', [
@@ -66,7 +66,9 @@ class ContactController extends Controller {
     public function actionUpdate($id) {
         $model = $this->findModel($id);
 
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+        if ($model->load(Yii::$app->request->post()) ) {
+            //print_r(Yii::$app->request->post()); die();
+            $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [

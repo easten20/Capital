@@ -7,6 +7,7 @@ use yii\helpers\FileHelper;
 use yii\helpers\Url;
 use yii\web\UploadedFile;
 
+
 /**
  * This is the model class for table "product".
  *
@@ -97,6 +98,13 @@ class Product extends \yii\db\ActiveRecord {
 	 */
 	public function getCategory() {
 		return $this->hasOne(Category::className(), ['id' => 'categoryId']);
+	}
+        
+        /**
+	 * @return \yii\db\ActiveQuery
+	 */
+	public function getCategories() {
+		return $this->hasMany(Categoryproduct::className(), ['productId' => 'id']);
 	}
 
 	/**

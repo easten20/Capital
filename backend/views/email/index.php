@@ -4,17 +4,18 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 
 /* @var $this yii\web\View */
-/* @var $searchModel common\models\ContactSearch */
+/* @var $searchModel common\models\brandTypeSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Contacts';
+$this->title = 'Emails';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="contact-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="brand-type-index">
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
+    <p>
+        <?= Html::a('Create Email', ['create'], ['class' => 'btn btn-success']) ?>
+    </p>
 
     <?=
     GridView::widget([
@@ -22,19 +23,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            'email:email',
-            'subject',
+            //  'id',
+            'email',
             [
-                'label' => 'Readed',
+                'label' => 'Get Info',
                 'format' => 'raw',
                 'value' => function($data) {
-                    if ($data->is_readed == '1') $balik = '<i title="Read" class="fa fa-envelope-o" aria-hidden="true"></i>'; else $balik = '<i title="Unread" class="fa fa-envelope" aria-hidden="true"></i>';
+                    if ($data->get_info == '1')
+                        $balik = '<i title="Get Info" class="fa fa-check" aria-hidden="true"></i>';
+                    else
+                        $balik = '<i title="Unget Info" class="fa fa-close" aria-hidden="true"></i>';
                     return $balik;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view}{delete}',
+                'template' => '{update}{delete}',
             ],
         ],
     ]);

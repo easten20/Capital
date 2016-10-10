@@ -18,15 +18,15 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
     
     <?= $form->field($model, 'brandTypeId')->dropDownList($dataCategoryBrand, ['prompt' => '--Choose a Brand--']) ?>
-
+    <label class="control-label" for="product-brandtypeid">Category</label>
     <?php
     echo TreeViewInput::widget([
         // single query fetch to render the tree
         // use the Product model you have in the previous step
         'query' => Tree::find()->addOrderBy('root, lft'),
         'headingOptions' => ['label' => 'Categories'],
-        'name' => 'kv-product', // input name
-        'value' => '1,2,3', // values selected (comma separated for multiple select)
+        'name' => 'categoryId', // input name
+        'value' => $category, // values selected (comma separated for multiple select)
         'asDropdown' => true, // will render the tree input widget as a dropdown.
         'multiple' => true, // set to false if you do not need multiple selection
         'fontAwesome' => true, // render font awesome icons
@@ -37,7 +37,7 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
             //'options'=>['disabled' => true],
     ]);
     ?>
-
+    <br/>
     <?= $form->field($model, 'itemNo')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className()) ?>

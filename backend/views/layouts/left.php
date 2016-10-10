@@ -26,7 +26,7 @@
                 ['label' => 'Category', 'icon' => 'fa fa-gift', 'url' => ['/brandtype/index-category']],
                 ['label' => 'Portfolio', 'icon' => 'fa fa-image', 'url' => ['/portfolio/index']],
                 ['label' => 'Page', 'icon' => 'fa fa-flag', 'url' => ['/page/index']],
-                //   ['label' => 'Contact', 'icon' => 'fa fa-circle-o', 'url' => ['/contact/index']],
+                ['label' => 'E-mail', 'icon' => 'fa fa-info-circle', 'url' => ['/email/index']],
                 ['label' => 'Cofounder', 'icon' => 'fa fa-user-plus', 'url' => ['/cofounder/index']],
                 [
                     'label' => 'Manage',
@@ -44,7 +44,7 @@
                             'items' => [
                                 ['label' => 'All User', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/user']],
                                 ['label' => 'Create', 'icon' => 'fa fa-circle-o', 'url' => ['/admin/user/signup']],
-                                ]
+                            ]
                         ],
                         // ['label' => 'User', 'icon' => 'fa fa-dot-circle-o', 'url' => ['/user']],
                         ['label' => 'Route', 'icon' => 'fa fa-dot-circle-o', 'url' => ['/admin/route']],
@@ -55,7 +55,7 @@
                     ]
                 ],
                     // ['label' => 'Change Password', 'icon' => 'fa fa-circle-o', 'url' => ['/site/change-password']],
-            ];            
+            ];
         }
         ?>
 
