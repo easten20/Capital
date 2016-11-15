@@ -12,8 +12,6 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="page-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
@@ -28,12 +26,11 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'name',
             'description:ntext',
             [
-            'attribute' => 'image1',
-            'value' => $model->image_1,
+            'attribute' => 'image_1',
+            'value' => Yii::$app->request->BaseUrl . '/uploads/page/' . $model->image_1,
             'format' => ['image', ['height' => '200']],
             ],
         ],

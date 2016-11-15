@@ -19,8 +19,8 @@ use Yii;
  */
 class BrandType extends \yii\db\ActiveRecord
 {
-    public $imageFile1;
     public $logoFile;
+    public $imageFile1;
 
     /**
      * @inheritdoc
@@ -39,8 +39,7 @@ class BrandType extends \yii\db\ActiveRecord
             [['brandName'], 'required'],
             [['description'], 'string'],
             [['brandName'], 'string', 'max' => 255],
-            [['image_1'], 'string', 'max' => 512],
-            [['logo'], 'string', 'max' => 512]
+            [['logo', 'image_1'], 'string', 'max' => 255]
         ];
     }
 
@@ -53,8 +52,8 @@ class BrandType extends \yii\db\ActiveRecord
             'id' => 'ID',
             'brandName' => 'Brand Name',
             'description' => 'Description',
-            'image_1' => 'Image 1',
             'logo' => 'Logo',
+            'image_1' => 'Image',
         ];
     }
 

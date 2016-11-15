@@ -5,8 +5,8 @@ use yii\helpers\Url;
 
 $data_brand = ArrayHelper::map(\common\models\BrandType::find()->
 		all(), 'id', 'brandName');
-$data_category = ArrayHelper::map(\common\models\Category::find()->where(['in', 'parentId', [1, 2]])->all(), 'id', 'name');
-
+//$data_category = ArrayHelper::map(\common\models\Category::find()->where(['in', 'parentId', [1, 2]])->all(), 'id', 'name');
+$data_category = ArrayHelper::map(\common\models\Tree::find()->where(['lvl' => 1])->all(), 'id', 'name');
 ?>
 <!-- Sidebar ============================================= -->
 <div class="sidebar nobottommargi#n">

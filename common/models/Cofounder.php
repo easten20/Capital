@@ -33,7 +33,7 @@ class Cofounder extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id', 'name', 'description'], 'required'],
+            [['name', 'description'], 'required'],
             [['id'], 'integer'],
             [['description'], 'string'],
             [['name', 'image_1'], 'string', 'max' => 512]
@@ -49,7 +49,7 @@ class Cofounder extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'description' => 'Description',
-            'image_1' => 'Image 1',
+            'image_1' => 'Image',
         ];
     }
 

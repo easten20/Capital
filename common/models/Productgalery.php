@@ -1,27 +1,27 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 
 /**
- * This is the model class for table "categoryproduct".
+ * This is the model class for table "productgalery".
  *
  * @property integer $id
  * @property integer $productId
- * @property integer $categoryId
+ * @property string $image
+ * @property string $information
  *
- * @property Category $category
  * @property Product $product
  */
-class Categoryproduct extends \yii\db\ActiveRecord
+class Productgalery extends \yii\db\ActiveRecord
 {
     /**
      * @inheritdoc
      */
     public static function tableName()
     {
-        return 'categoryproduct';
+        return 'productgalery';
     }
 
     /**
@@ -30,8 +30,8 @@ class Categoryproduct extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['productId', 'categoryId'], 'integer'],
-            [['categoryId'], 'exist', 'skipOnError' => true, 'targetClass' => Category::className(), 'targetAttribute' => ['categoryId' => 'id']],
+            [['productId'], 'integer'],
+            [['image', 'information'], 'string', 'max' => 255],
             [['productId'], 'exist', 'skipOnError' => true, 'targetClass' => Product::className(), 'targetAttribute' => ['productId' => 'id']],
         ];
     }
@@ -44,16 +44,9 @@ class Categoryproduct extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'productId' => 'Product ID',
-            'categoryId' => 'Category ID',
+            'image' => 'Image',
+            'information' => 'Information',
         ];
-    }
-
-    /**
-     * @return \yii\db\ActiveQuery
-     */
-    public function getCategory()
-    {
-        return $this->hasOne(Category::className(), ['id' => 'categoryId']);
     }
 
     /**
@@ -62,5 +55,14 @@ class Categoryproduct extends \yii\db\ActiveRecord
     public function getProduct()
     {
         return $this->hasOne(Product::className(), ['id' => 'productId']);
+    }
+
+    /**
+     * @inheritdoc
+     * @return ProductgaleryQuery the active query used by this AR class.
+     */
+    public static function find()
+    {
+        return new ProductgaleryQuery(get_called_class());
     }
 }

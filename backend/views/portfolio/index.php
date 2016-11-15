@@ -17,13 +17,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= Html::a('Create Portfolio', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?=
+    GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'location',            
+            'location',
             //[
             //'attribute' => 'thumbnail',
             //'value' => 'thumbnail',
@@ -32,9 +33,42 @@ $this->params['breadcrumbs'][] = $this->title;
             //'image_1',
             // 'image_2',
             // 'image_3',
-
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-eye-open"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'View'),
+                                    'class' => 'btn btn-xs btn-success'
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-pencil"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'class' => 'btn btn-xs btn-warning'
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-trash"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Delete'),
+                                    'class' => 'btn btn-xs btn-danger'
+                        ]);
+                    }
+                ]
+            ],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{galeri}',
+                'buttons' => [
+                    'galeri' => function ($url = null, $model) {
+                        return Html::a('<span class="glyphicon glyphicon-picture"></span> ', $url = 'index.php?r=portfoliogalery/index&portfolioId=' . $model->id . '', [
+                                    'title' => Yii::t('yii', 'Galeri'),
+                                    'class' => 'btn btn-xs btn-primary'
+                        ]);
+                    }
+                ]
+            ],
         ],
-    ]); ?>
+    ]);
+    ?>
 
 </div>

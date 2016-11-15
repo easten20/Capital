@@ -69,11 +69,13 @@ class SiteController extends Controller {
      * @return mixed
      */
     public function actionIndex() {
+        
         $searchModel = new PortfolioSearch();
         $portfolio = $searchModel->search("");
         $portfolio->pagination = array('pageSize' => 8);
         $pages = $searchModel->search("");
         $cofounders = Cofounder::find()->where([])->all();
+        
         return $this->render('index', [
                     'portfolio' => $portfolio,
                     'pages' => $pages,

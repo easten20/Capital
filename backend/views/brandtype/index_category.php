@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use kartik\tree\TreeView;
 use kartik\tree\TreeViewInput;
-use app\models\Tree;
+use common\models\Tree;
 
 /* @var $this yii\web\View */
 /* @var $searchModel common\models\brandTypeSearch */
@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?php
+    
     echo TreeView::widget([
         // single query fetch to render the tree
         // use the Product model you have in the previous step

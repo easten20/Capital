@@ -2,7 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-
+use kartik\file\FileInput;
+use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\Cofounder */
 /* @var $form yii\widgets\ActiveForm */
@@ -12,28 +13,32 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $form->field($model, 'id')->textInput() ?>
-
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>    
 
-      <?=$form->field($model, 'imageFile1')->fileInput()?>
-
-	<?php if (isset($model->image_1) && !empty($model->image_1)) {
+    <?=
+    $form->field($model, 'image_1')->widget(FileInput::classname(), [
+        'options' => ['accept' => 'image/*'],
+    ])
     ?>
-    <div class="form-group">
-    <?=Html::img($model->image_1, ['alt' => 'some', 'height' => '200']);?>
-    <?=Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 1], [
-        'title' => \Yii::t('yii', 'RemoveImage'),
-        'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-        'data-method' => 'post',
-        'data-pjax' => '0',
-        'style' => 'vertical-align:top;',
-    ]);?>
-    </div>
-    <?php }?>
 
+    <?php
+    if (!($model->isNewRecord)) {
+        ?>    
+        <?=
+        DetailView::widget([
+            'model' => $model,
+            'attributes' => [
+                [
+                    'attribute' => 'image_1',
+                    'value' => Yii::$app->request->BaseUrl . '/uploads/cofounder/' . $model->image_1,
+                    'format' => ['image', ['width' => '300px']],
+                ],
+            ],
+        ]);
+    }
+    ?>
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>

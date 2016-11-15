@@ -1,6 +1,14 @@
 <?php
 return [
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
+    'modules' => [
+        
+        'treemanager' => [
+            'class' => '\kartik\tree\Module',
+           
+            // other module settings, refer detailed documentation
+        ]
+    ],
     'components' => [
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -13,8 +21,9 @@ return [
         'class' => 'mdm\admin\components\AccessControl',
         'allowActions' => [
             'site/*',
-            'admin/*',
-            'some-controller/some-action',
+     //       'admin/*',
+            'brand/*',
+            'product/*',
             // The actions listed here will be allowed to everyone including guests.
             // So, 'admin/*' should not appear here in the production, of course.
             // But in the earlier stages of your development, you may probably want to

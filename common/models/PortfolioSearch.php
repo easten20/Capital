@@ -19,7 +19,7 @@ class PortfolioSearch extends Portfolio
     {
         return [
             [['id'], 'integer'],
-            [['name', 'location', 'thumbnail', 'image_1', 'image_2', 'image_3'], 'safe'],
+            [['name', 'location', 'thumbnail'], 'safe'],
         ];
     }
 
@@ -61,10 +61,7 @@ class PortfolioSearch extends Portfolio
 
         $query->andFilterWhere(['like', 'name', $this->name])
             ->andFilterWhere(['like', 'location', $this->location])
-            ->andFilterWhere(['like', 'thumbnail', $this->thumbnail])
-            ->andFilterWhere(['like', 'image_1', $this->image_1])
-            ->andFilterWhere(['like', 'image_2', $this->image_2])
-            ->andFilterWhere(['like', 'image_3', $this->image_3]);
+            ->andFilterWhere(['like', 'thumbnail', $this->thumbnail]);
 
         return $dataProvider;
     }

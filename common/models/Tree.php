@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
  
 use Yii;
  
@@ -11,7 +11,7 @@ class Tree extends \kartik\tree\models\Tree
      */
     public static function tableName()
     {
-        return 'tree';
+        return 'category';
     }    
     
     /**

@@ -6,13 +6,11 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model common\models\BrandType */
 
-$this->title = $model->id;
+$this->title = $model->brandName;
 $this->params['breadcrumbs'][] = ['label' => 'Brand Types', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="brand-type-view">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
@@ -28,18 +26,18 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'brandName',            
             'description:ntext',
+            
             [
-            'attribute' => 'image1',
-            'value' => $model->image_1,
-            'format' => ['image', ['height' => '200']],
+                'attribute' => 'logo',
+                'value' => Yii::$app->request->BaseUrl . '/uploads/brand/' . $model->logo,
+                'format' => ['image', ['width' => '300px']],
             ],
             [
-            'attribute' => 'logo',
-            'value' => $model->logo,
-            'format' => ['image', ['height' => '200']],
+                'attribute' => 'image_1',
+                'value' => Yii::$app->request->BaseUrl . '/uploads/brand/' . $model->image_1,
+                'format' => ['image', ['width' => '300px']],
             ],
         ],
     ]) ?>

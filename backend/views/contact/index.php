@@ -11,8 +11,6 @@ $this->title = 'Contacts';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="contact-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
@@ -34,7 +32,21 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{view}{delete}',
+                'template' => '{view} {delete}',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-eye-open"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'View'),
+                                    'class' => 'btn btn-xs btn-success'
+                        ]);
+                    },                    
+                    'delete' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-trash"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Delete'),
+                                    'class' => 'btn btn-xs btn-danger'
+                        ]);
+                    }
+                ]
             ],
         ],
     ]);

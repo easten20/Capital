@@ -8,7 +8,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\web\UploadedFile;
 /**
  * PageController implements the CRUD actions for Page model.
  */
@@ -72,8 +72,13 @@ class PageController extends Controller
         $model = new Page();
         
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->upload();
-            $model->save();
+            $image = UploadedFile::getInstance($model, 'image_1');            
+            $model->image_1 = rand(10000, 99999) . $image->name;
+            $path = Yii::$app->basePath . '/web/uploads/page/' . $model->image_1;            
+            if ($model->save()) {
+                $image->saveAs($path);
+                return $this->redirect(['view', 'id' => $model->id]);
+            } 
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -92,9 +97,23 @@ class PageController extends Controller
     {
         $model = $this->findModel($id);
         
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->upload();
-            $model->save();
+        $l_image = $model->image_1;
+        if ($model->load(Yii::$app->request->post())) {
+            $image = UploadedFile::getInstance($model, 'image_1');
+            $path = Yii::$app->basePath . '/web/uploads/page/';
+            if ($image) {
+                
+                if (file_exists($path . $l_image)) { print_r($path . $l_image); die();
+                    unlink($path . $l_image);
+                }
+                $model->image_1 = rand(10000, 99999) . $image->name;
+            } else {
+                $model->image_1 = $l_image;
+            }
+            if ($model->save()) {
+                if ($image)
+                    $image->saveAs($path . $model->image_1);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -111,7 +130,13 @@ class PageController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $path = Yii::$app->basePath . '/web/uploads/page/';
+        if (file_exists($path . $model->image_1)) {
+            unlink($path . $model->image_1);
+        }
+        $model->delete();
+
 
         return $this->redirect(['index']);
     }

@@ -1,9 +1,7 @@
 <?php
+
 $params = array_merge(
-    require(__DIR__ . '/../../common/config/params.php'),
-    require(__DIR__ . '/../../common/config/params-local.php'),
-    require(__DIR__ . '/params.php'),
-    require(__DIR__ . '/params-local.php')
+        require(__DIR__ . '/../../common/config/params.php'), require(__DIR__ . '/../../common/config/params-local.php'), require(__DIR__ . '/params.php'), require(__DIR__ . '/params-local.php')
 );
 
 return [
@@ -14,10 +12,10 @@ return [
     'bootstrap' => ['log'],
     'modules' => [
         'redactor' => 'yii\redactor\RedactorModule',
-		'treemanager' =>  [
-			'class' => '\kartik\tree\Module',
-			// other module settings, refer detailed documentation
-		]
+//        'treemanager' => [
+//            'class' => '\kartik\tree\Module',
+//        // other module settings, refer detailed documentation
+//        ]
     ],
     'components' => [
         'user' => [
@@ -36,7 +34,6 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-	
     ],
     'params' => $params,
 ];

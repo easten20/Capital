@@ -24,10 +24,7 @@ class Portfolio extends \yii\db\ActiveRecord
      * @UploadedFile
      */
     public $thumbnailFile;
-    public $imageFile1;
-    public $imageFile2;
-    public $imageFile3;        
-
+   
     /**
      * @inheritdoc
      */
@@ -43,7 +40,8 @@ class Portfolio extends \yii\db\ActiveRecord
     {
         return [
             [['name', 'location'], 'required'],
-            [['name', 'location'], 'string', 'max' => 256],            
+            [['name', 'location'], 'string', 'max' => 256],        
+            [['thumbnail'], 'string', 'max' => 512]
         ];
     }
 
@@ -57,9 +55,7 @@ class Portfolio extends \yii\db\ActiveRecord
             'name' => 'Name',
             'location' => 'Location',
             'thumbnail' => 'Thumbnail',
-            'image_1' => 'Image 1',
-            'image_2' => 'Image 2',
-            'image_3' => 'Image 3',
+         
         ];
     }
 
@@ -70,6 +66,11 @@ class Portfolio extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PortfolioQuery(get_called_class());
+    }
+    
+    public function getPortfoliogaleries()
+    {
+        return $this->hasMany(Portfoliogalery::className(), ['portfolioId' => 'id']);
     }
 
 

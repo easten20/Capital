@@ -37,7 +37,22 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
             ],
             ['class' => 'yii\grid\ActionColumn',
-                'template' => '{update}{delete}',
+                'template' => ' {update} {delete}',
+                'buttons' => [
+                    
+                    'update' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-pencil"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'class' => 'btn btn-xs btn-warning'
+                        ]);
+                    },
+                    'delete' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-trash"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Delete'),
+                                    'class' => 'btn btn-xs btn-danger'
+                        ]);
+                    }
+                ]
             ],
         ],
     ]);

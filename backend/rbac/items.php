@@ -5,7 +5,6 @@ return [
         'children' => [
             '/admin/*',
             '/gii/*',
-            '/brandtype/*',
             '/category/*',
             '/cofounder/*',
             '/contact/*',
@@ -15,6 +14,9 @@ return [
             '/site/*',
             '/treemanager/*',
             '/email/*',
+            '/productgalery/*',
+            '/portfoliogalery/*',
+            '/brandtype/*',
         ],
     ],
     '/admin/*' => [
@@ -284,6 +286,42 @@ return [
         'type' => 2,
     ],
     '/email/*' => [
+        'type' => 2,
+    ],
+    '/productgalery/index' => [
+        'type' => 2,
+    ],
+    '/productgalery/view' => [
+        'type' => 2,
+    ],
+    '/productgalery/create' => [
+        'type' => 2,
+    ],
+    '/productgalery/update' => [
+        'type' => 2,
+    ],
+    '/productgalery/delete' => [
+        'type' => 2,
+    ],
+    '/productgalery/*' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/index' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/view' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/create' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/update' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/delete' => [
+        'type' => 2,
+    ],
+    '/portfoliogalery/*' => [
         'type' => 2,
     ],
 ];

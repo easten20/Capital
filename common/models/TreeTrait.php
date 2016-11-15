@@ -6,7 +6,7 @@
  * @version   1.0.6
  */
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;

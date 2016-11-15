@@ -24,7 +24,6 @@ $this->registerMetaTag([
     'name' => 'robots',
     'content' => 'index,follow',
 ]);
-
 ?>
 
 
@@ -32,38 +31,50 @@ $this->registerMetaTag([
 
 <div class="product-container container clearfix">
 
-<!-- Post Content
-					============================================= -->
-					<div class="postcontent nobottommargin col_last">
+    <!-- Post Content
+                                            ============================================= -->
+    <div class="postcontent nobottommargin col_last">
 
-<?php Pjax::begin(['id' => 'pjax-shop']) ?>
-						<!-- Shop
-						============================================= -->
-						<div id="shop" class="product-3 clearfix">
-							<?php foreach($dataProvider->getModels() as $product) { ?>
-							<div class="product clearfix">
-								<div class="product-image">									
-									<a href="<?= Url::to('@web/product/'.$product->itemNo, true); ?>"><img src="<?= Url::to($product->image_1, true); ?>"  alt="<?= $product->itemNo ?>"></a>
-								</div>
-								<div class="product-desc center">
-									<div class="product-title"><h3><a href="<?= Url::to('@web/product/'.$product->itemNo, true); ?>"><?= $product->itemNo ?></a></h3></div>									
-								</div>
-							</div>
-							<?php }	?>
-							
-						</div><!-- #shop end -->
-						<div class="clearfix" style="float: left;" >
-						<?php
-							// display pagination
-							echo LinkPager::widget([
-								'pagination' => $dataProvider->pagination,
-							]);
-							?>
-				        </div>
-					</div><!-- .postcontent end -->
-<?php Pjax::end() ?>
-					   	<?php $this->beginContent("@app/views/product/sidebar.php"); ?>
-		
-					<?php $this->endContent();?>
+        <?php Pjax::begin(['id' => 'pjax-shop']) ?>
+        <!-- Shop
+        ============================================= -->
+        <div id="shop" class="product-3 clearfix">
+            <?php foreach ($products as $product) { ?>
+                <div class="product clearfix">
+                    <div class="product-image">									
+                        <a href="<?= Url::to('@web/product/' . $product->itemNo, true); ?>">
+                            <?php 
+                                $no = 1;
+                                foreach ($product->productgaleries as $galeryproduct) {  
+                                if($no == 1):     ?>
+                                <img src="<?= Url::to($galeryproduct->image, true); ?>"  alt="<?= $product->itemNo ?>">
+                                <?php 
+                                endif;
+                                $no++;
+                                } 
+                                ?>
+                            
+                        </a>
+                    </div>
+                    <div class="product-desc center">
+                        <div class="product-title"><h3><a href="<?= Url::to('@web/product/' . $product->itemNo, true); ?>"><?= $product->itemNo ?></a></h3></div>									
+                    </div>
+                </div>
+            <?php } ?>
+
+        </div><!-- #shop end -->
+        <div class="clearfix" style="float: left;" >
+            <?php
+            // display pagination
+            echo LinkPager::widget([
+                'pagination' => $dataProvider->pagination,
+            ]);
+            ?>
+        </div>
+    </div><!-- .postcontent end -->
+    <?php Pjax::end() ?>
+    <?php $this->beginContent("@app/views/product/sidebar.php"); ?>
+
+    <?php $this->endContent(); ?>
 
 </div>

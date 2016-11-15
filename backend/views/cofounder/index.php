@@ -26,7 +26,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             'description:ntext',            
 
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} ',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-eye-open"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'View'),
+                                    'class' => 'btn btn-xs btn-success'
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-pencil"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'class' => 'btn btn-xs btn-warning'
+                        ]);
+                    },
+                    
+                ]
+            ],
         ],
     ]); ?>
 

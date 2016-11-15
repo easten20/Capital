@@ -24,13 +24,30 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
             'name',
             'title',
-            'description:ntext', 
+            //'description:ntext', 
             //[
             //'attribute' => 'image_1',
             //'value' => 'image_1',
             //'format' => ['image', ['height' => '200']],
             //],
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{view} {update}'],
+            ['class' => 'yii\grid\ActionColumn',
+                'template' => '{view} {update} ',
+                'buttons' => [
+                    'view' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-eye-open"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'View'),
+                                    'class' => 'btn btn-xs btn-success'
+                        ]);
+                    },
+                    'update' => function ($url, $model) {
+                        return Html::a(' <span class="glyphicon glyphicon-pencil"></span> ', $url, [
+                                    'title' => Yii::t('yii', 'Update'),
+                                    'class' => 'btn btn-xs btn-warning'
+                        ]);
+                    },
+                    
+                ]
+            ],
         ],
     ]); ?>
 

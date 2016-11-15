@@ -15,7 +15,7 @@ class ProductSearch extends Product {
 	 */
 	public function rules() {
 		return [
-			[['id', 'brandTypeId', 'categoryId', 'power', 'cri', 'cutout', 'angle', 'ledChip'], 'integer'],
+			[['id', 'brandTypeId', 'power', 'cri', 'cutout', 'angle', 'ledChip'], 'integer'],
 			[['itemNo', 'luminous', 'dimension'], 'safe'],
 			[['pfc'], 'number'],
 			[['brandType'], 'safe'],
@@ -54,8 +54,7 @@ class ProductSearch extends Product {
 
 		$query->andFilterWhere([
 			'id' => $this->id,
-			'brandTypeId' => $this->brandTypeId,
-			'categoryId' => $this->categoryId,
+			'brandTypeId' => $this->brandTypeId,			
 			'power' => $this->power,
 			'cri' => $this->cri,
 			'pfc' => $this->pfc,

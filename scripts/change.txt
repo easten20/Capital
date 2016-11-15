@@ -1,0 +1,13 @@
+table baru
++categoryproduct
++email
++productgaley
++portfoliogalery
+
+tabel yang diubah
++category
+
+field yang di hapus
+-categoryId, image_1-5 => product
+-image_1 => brandtype
+-imange_1-3 => portfolio

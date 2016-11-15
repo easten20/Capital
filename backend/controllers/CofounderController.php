@@ -9,7 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
-
+use yii\web\UploadedFile;
 /**
  * CofounderController implements the CRUD actions for Cofounder model.
  */
@@ -73,8 +73,13 @@ class CofounderController extends Controller
         $model = new Cofounder();
 
         if ($model->load(Yii::$app->request->post()) && $model->validate() ) {
-            $model->upload();
-            $model->save();            
+            $image = UploadedFile::getInstance($model, 'image_1');
+            $model->image_1 = rand(10000, 99999) . $image->name;
+            $path = Yii::$app->basePath . '/web/uploads/cofounder/' . $model->image_1;
+            if ($model->save()) {
+                $image->saveAs($path);
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -92,10 +97,22 @@ class CofounderController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+         $l_image = $model->image_1;
         if ($model->load(Yii::$app->request->post())) {
-            $model->upload();
-            $model->save();
+            $image = UploadedFile::getInstance($model, 'image_1');
+            $path = Yii::$app->basePath . '/web/uploads/cofounder/';
+            if ($image) {
+                if (file_exists($path . $l_image)) {
+                    unlink($path . $l_image);
+                }
+                $model->image_1 = rand(10000, 99999) . $image->name;
+            } else {
+                $model->image_1 = $l_image;
+            }
+            if ($model->save()) {
+                if ($image)
+                    $image->saveAs($path . $model->image_1);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -112,7 +129,12 @@ class CofounderController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $path = Yii::$app->basePath . '/web/uploads/cofounder/';
+        if (file_exists($path . $model->image_1)) {
+            unlink($path . $model->image_1);
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }

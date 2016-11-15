@@ -74,7 +74,13 @@ class PortfolioController extends Controller
         $model = new Portfolio();
 
         if ($model->load(Yii::$app->request->post())) {
-            $model->upload();
+            //$model->upload();
+            $image = UploadedFile::getInstance($model, 'thumbnail');
+            $model->thumbnail = rand(10000, 99999) . $image->name;
+            $path = Yii::$app->basePath . '/web/uploads/portfolio/' . $model->thumbnail;
+            if ($model->save()) {
+                $image->saveAs($path);
+            }
             $model->save();
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -93,10 +99,23 @@ class PortfolioController extends Controller
     public function actionUpdate($id)
     {        
         $model = $this->findModel($id);
-
+        $l_logo = $model->thumbnail;
         if ($model->load(Yii::$app->request->post())) {            
-            $model->upload();
-            $model->save();
+            //$model->upload();
+            $image = UploadedFile::getInstance($model, 'thumbnail');
+            $path = Yii::$app->basePath . '/web/uploads/portfolio/';
+            if ($image) {
+                if (file_exists($path . $l_logo)) {
+                    unlink($path . $l_logo);
+                }
+                $model->thumbnail = rand(10000, 99999) . $image->name;
+            } else {
+                $model->thumbnail = $l_logo;
+            }
+            if ($model->save()) {
+                if ($image)
+                    $image->saveAs($path . $model->thumbnail);
+            }
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -113,7 +132,12 @@ class PortfolioController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $path = Yii::$app->basePath . '/web/uploads/portfolio/';
+        if (file_exists($path . $model->image)) {
+            unlink($path . $model->image);
+        }
+        $model->delete();
 
         return $this->redirect(['index']);
     }

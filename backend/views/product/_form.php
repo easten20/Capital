@@ -56,93 +56,7 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
 
     <?= $form->field($model, 'ledChip')->textInput() ?>
 
-    <?= $form->field($model, 'dimension')->textInput() ?>
-
-    <?= $form->field($model, 'imageFile1')->fileInput() ?>
-
-    <?php if (isset($model->image_1) && !empty($model->image_1)) {
-        ?>
-        <div class="form-group">
-            <?= Html::img($model->image_1, ['alt' => 'some', 'height' => '200']); ?>
-            <?=
-            Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 1], [
-                'title' => \Yii::t('yii', 'RemoveImage'),
-                'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-                'data-method' => 'post',
-                'data-pjax' => '0',
-                'style' => 'vertical-align:top;',
-            ]);
-            ?>
-        </div>
-    <?php } ?>
-
-    <?= $form->field($model, 'imageFile2')->fileInput() ?>
-    <?php if (isset($model->image_2) && !empty($model->image_2)) {
-        ?>
-        <div class="form-group">
-            <?= Html::img($model->image_2, ['alt' => 'some', 'height' => '200']); ?>
-            <?=
-            Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 2], [
-                'title' => \Yii::t('yii', 'RemoveImage'),
-                'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-                'data-method' => 'post',
-                'data-pjax' => '0',
-                'style' => 'vertical-align:top;',
-            ]);
-            ?>
-        </div>
-    <?php } ?>
-
-    <?= $form->field($model, 'imageFile3')->fileInput() ?>
-    <?php if (isset($model->image_3) && !empty($model->image_3)) {
-        ?>
-        <div class="form-group">
-            <?= Html::img($model->image_3, ['alt' => 'some', 'height' => '200']); ?>
-            <?=
-            Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 3], [
-                'title' => \Yii::t('yii', 'RemoveImage'),
-                'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-                'data-method' => 'post',
-                'data-pjax' => '0',
-                'style' => 'vertical-align:top;',
-            ]);
-            ?>
-        </div>
-    <?php } ?>
-
-    <?= $form->field($model, 'imageFile4')->fileInput() ?>
-    <?php if (isset($model->image_4) && !empty($model->image_4)) {
-        ?>
-        <div class="form-group">
-            <?= Html::img($model->image_4, ['alt' => 'some', 'height' => '200']); ?>
-            <?=
-            Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 4], [
-                'title' => \Yii::t('yii', 'RemoveImage'),
-                'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-                'data-method' => 'post',
-                'data-pjax' => '0',
-                'style' => 'vertical-align:top;',
-            ]);
-            ?>
-        </div>
-    <?php } ?>
-
-    <?= $form->field($model, 'imageFile5')->fileInput() ?>
-    <?php if (isset($model->image_5) && !empty($model->image_5)) {
-        ?>
-        <div class="form-group">
-            <?= Html::img($model->image_5, ['alt' => 'some', 'height' => '200']); ?>
-            <?=
-            Html::a('<span class="glyphicon glyphicon-trash"></span>', ["remove", "id" => $model->id, "imageId" => 5], [
-                'title' => \Yii::t('yii', 'RemoveImage'),
-                'data-confirm' => \Yii::t('yii', 'Are you sure to delete this item?'),
-                'data-method' => 'post',
-                'data-pjax' => '0',
-                'style' => 'vertical-align:top;',
-            ]);
-            ?>
-        </div>
-    <?php } ?>
+    <?= $form->field($model, 'dimension')->textInput() ?>  
 
 
     <div class="form-group">
@@ -153,19 +67,3 @@ $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asAr
 
 </div>
 
-<script type="text/javascript">
-    $(function() {
-        $("#tree").jstree({
-            "checkbox": {
-                "keep_selected_style": false
-            },
-            "plugins": ["checkbox"]
-        });
-        $("#tree").bind("changed.jstree",
-                function(e, data) {
-                    alert("Checked: " + data.node.id);
-                    alert("Parent: " + data.node.parent);
-                    //alert(JSON.stringify(data));
-                });
-    });
-</script>
