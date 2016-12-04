@@ -56,8 +56,7 @@ class CategorySearch extends Category
         }
 
         $query->andFilterWhere([
-            'id' => $this->id,
-            'parentId' => $this->parentId,
+            'id' => $this->id,             
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

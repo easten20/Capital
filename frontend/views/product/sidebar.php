@@ -5,7 +5,13 @@ use yii\helpers\Url;
 
 $data_brand = ArrayHelper::map(\common\models\BrandType::find()->
 		all(), 'id', 'brandName');
-$data_category = ArrayHelper::map(\common\models\Category::find()->where(['in', 'parentId', [1, 2]])->all(), 'id', 'name');
+$data_category = ArrayHelper::map(\common\models\Category::find()->where(['in', 'lvl', [0]])->all(), 'id', 'name');
+if (isset($categoryId)) {
+	$data_subcategory = ArrayHelper::map(\common\models\Category::find()->where(['=', 'lvl', $categoryId])->all(), 'id', 'name');
+}
+else {
+	$data_subcategory = ArrayHelper::map(\common\models\Category::find()->where(['!=', 'lvl', 0])->all(), 'id', 'name');
+}
 
 ?>
 <!-- Sidebar ============================================= -->
@@ -25,23 +31,24 @@ $data_category = ArrayHelper::map(\common\models\Category::find()->where(['in', 
 	'id' => 'filterName',
 	'onchange' => 'searchFilter()',
 ])?>
-                </div>
-                <div class="search_field">
-                    <p>
-                        Brand
-                    </p>
-                    <?=BaseHtml::dropDownList('brand', null, $data_brand, ['prompt' =>
-	'- select group -',
-	'class' => 'form-control search_input',
-	'id' => 'filterBrand',
-	'onchange' => 'searchFilter()',
-])?>
-                </div>
+                </div>                
                 <div class="search_field">
                     <p>
                         Category
                     </p>
                     <?=BaseHtml::dropDownList('category', null, $data_category, ['prompt' =>
+	'- select group -',
+	'class' => 'form-control search_input',
+	'id' => 'filterCategory',
+	'onchange' => 'searchFilter()',
+
+])?>
+                </div>
+                <div class="search_field">
+                    <p>
+                        SubCategory
+                    </p>
+                    <?=BaseHtml::dropDownList('subcategory', null, $data_subcategory, ['prompt' =>
 	'- select group -',
 	'class' => 'form-control search_input',
 	'id' => 'filterCategory',

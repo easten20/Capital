@@ -3,7 +3,7 @@ return [
     'components' => [
         'db' => [
             'class' => 'yii\db\Connection',
-            'dsn' => 'mysql:host=localhost;dbname=capital',
+            'dsn' => 'mysql:host=localhost;dbname=cled',
             'username' => 'root',
             'password' => 'password',
            //'dsn' => 'mysql:host=localhost;dbname=timurweb_capital', // db and username www.timur.web.id

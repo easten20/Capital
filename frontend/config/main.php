@@ -10,6 +10,12 @@ return [
     'id' => 'app-frontend',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+      'modules' => [      
+         'treemanager' =>  [
+                                'class' => '\kartik\tree\Module',
+                                // other module settings, refer detailed documentation
+        ]
+    ],
     'controllerNamespace' => 'frontend\controllers',
     'components' => [
         'urlManager' => [
@@ -18,7 +24,7 @@ return [
              'rules'  => array(
                 //'<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:product>/' => 'product/index',
-                '<controller:product>/<itemNo:\w+>' => 'product/view',                
+                '<controller:product>/<itemNo:[\w-]+>' => 'product/view',                
                 '<controller:brand>/<brand:\w+>' => 'brand/view',  
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',                

@@ -1,20 +1,20 @@
 
-<?php use yii\helpers\Url;?>
+<?php use yii\helpers\Url;
+use common\components\Helpers;
+?>
 
 <?php
 $brands = \common\models\BrandType::find()->all();
-$categories = \common\models\Category::find()->where(['in', 'parentId', [1, 2]])->all();
+$isTransparent = true;
 ?>
 
 <!-- Header ============================================= -->
 <?php
 
-/* @var $isTransparent */
-
 if (isset($isTransparent)) {?>
-		<header id="header" class="transparent-header dark full-header" data-sticky-class="dark">
+		<header id="header" class="transparent-header full-header" data-sticky-class="not-dark">
 <?php } else {?>
-<header id="header" class="full-header dark" data-sticky-class="dark">
+<header id="header" class="full-header" data-sticky-class="not-dark">
 <?php }?>
 
 			<div id="header-wrap">
@@ -36,30 +36,18 @@ if (isset($isTransparent)) {?>
 
 						<ul>
 							<li><a href="<?=Url::to('@web/', true);?>"><div>Home</div></a></li>
-							<li class="current mega-menu"><a href="#"><div>Products</div></a>
-								<div class="mega-menu-content style-2 col-4 clearfix">
-									<ul>
-									</ul>
-									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Brands</div></a>
-										<ul>
+							<li><a href="#"><div>Products</div></a>
+								<ul>
+      							<?= Helpers::categoryTreeBuild(); ?>
+      							</ul>
+      						</li>      													
+							<!--<li><a href="#"><div>Projects</div></a>								
+      							<ul>
 												<?php foreach ($brands as $brand) {?>
 													<li><a href="<?=Url::to('@web/brand/' . $brand->brandName, true);?>"><div><?=$brand->brandName?></div></a></li>
 												<?php }?>
-											</ul>
-										</li>
-									</ul>
-									<ul>
-										<li class="mega-menu-title"><a href="#"><div>Categories</div></a>
-										    <ul>
-												<?php foreach ($categories as $category) {?>
-													<li><a href="<?=Url::to('@web/product/?ProductSearch[categoryId]=' . $category->id, true);?>"><div><?=$category->name?></div></a></li>
-												<?php }?>
-											</ul>
-										</li>
-									</ul>
-								</div>
-							</li>
+								</ul>      					
+      						</li>							-->
 							<li><a href="<?=Url::to('@web/site/about', true);?>"><div>About Us</div></a></li>
 							<li><a href="<?=Url::to('@web/site/contact', true);?>"><div>Contact</div></a></li>
 						</ul>
@@ -67,7 +55,7 @@ if (isset($isTransparent)) {?>
 						<div id="top-search">
 								<a href="#" id="top-search-trigger"><i class="icon-search3"></i><i class="icon-line-cross"></i></a>
 								<form action="<?=Url::to('@web/product/', true);?>" method="get">
-									<input type="text" name="ProductSearch[itemNo]" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
+									<input type="text" name="name" class="form-control" value="" placeholder="Type &amp; Hit Enter..">
 								</form>
 							</div><!-- #top-search end -->
 					</nav><!-- #primary-menu end -->

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	'model' => $model,
 	'attributes' => [
 		'id',
-		'brandTypeId',
+		//'brandTypeId',
 		'categoryId',
 		'itemNo',
 		'description',
@@ -38,8 +38,7 @@ $this->params['breadcrumbs'][] = $this->title;
 		'cri',
 		'pfc',
 		'cutout',
-		'angle',
-		'ledChip',
+		'angle',		
 		'dimension',
 		[
 			'attribute' => 'image_1',

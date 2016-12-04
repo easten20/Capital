@@ -24,7 +24,8 @@ class CanvasAsset extends AssetBundle
         'css/canvas/font-icons.css',
         'css/canvas/animate.css',
         'css/canvas/magnific-popup.css',
-        'css/canvas/responsive.css'
+        'css/canvas/responsive.css',
+        'css/canvas/color.css'
     ];
     public $js = [    
         'js/jquery.js',

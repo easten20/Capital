@@ -1,7 +1,7 @@
 <?php
 use frontend\assets\ProductAsset;
 
-$this->title = $model->itemNo;
+$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'product', 'url' => ['/product']];
 $this->params['breadcrumbs'][] = $model->itemNo;
 use yii\helpers\Url;
@@ -94,8 +94,7 @@ $this->registerMetaTag([
 									<div class="panel panel-default product-meta">
 										<div class="panel-body">
 											<span itemprop="productID" class="sku_wrapper">Name: <span class="sku"><?=$model->itemNo?></span></span>
-											<span class="posted_in">Category: <a href="<?=Url::to('@web/product/?Product[categoryId]=' . $model->category->id, true);?>" rel="tag"><?=$model->category->name?></a></span>
-											<span class="posted_in">Brand: <a href="<?=Url::to('@web/brand/' . $model->brandType->brandName, true);?>" rel="tag"><?=$model->brandType->brandName?></a></span>
+											<span class="posted_in">Category: <a href="<?=Url::to('@web/product/?category=' . $model->category->id, true);?>" rel="tag"><?=$model->category->name?></a></span>											
 										</div>
 									</div><!-- Product Single - Meta End -->
 
@@ -140,38 +139,120 @@ $this->registerMetaTag([
 
 												<table class="table table-striped table-bordered">
 													<tbody>
+														<?php if (isset($model->itemNo) && !empty($model->itemNo) ) { ?>
 														<tr>
-															<td>Power</td>
-															<td><?=$model->power?></td>
+															<td>Item No.</td>
+															<td><?=$model->itemNo?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->voltage) && !empty($model->voltage) ) { ?>
 														<tr>
-															<td>Luminous</td>
+															<td>Input Voltage</td>
+															<td><?=$model->voltage?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->power) && !empty($model->power) ) { ?>
+														<tr>
+															<td>Power Factor</td>
+															<td><?=$model->power?></td>
+														</tr>			
+														<?php } ?>
+														<?php if (isset($model->frequency) && !empty($model->frequency) ) { ?>
+														<tr>
+															<td>Power Efficiency</td>
+															<td><?=$model->efficiency?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->consumption) && !empty($model->consumption) ) { ?>
+														<tr>
+															<td>LED Consumptions</td>
+															<td><?=$model->consumption?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->consumption_lamp) && !empty($model->consumption_lamp) ) { ?>
+														<tr>
+															<td>Lamp Consumptions</td>
+															<td><?=$model->consumption_lamp?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->luminous) && !empty($model->luminous) ) { ?>
+														<tr>
+															<td>LED Luminous</td>
 															<td><?=$model->luminous?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->luminous_lamp) && !empty($model->luminous_lamp) ) { ?>
+														<tr>
+															<td>Lamp Luminous</td>
+															<td><?=$model->luminous_lamp?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->cri) && !empty($model->cri) ) { ?>
 														<tr>
 															<td>CRI</td>
 															<td><?=$model->cri?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->angle) && !empty($model->angle) ) { ?>
 														<tr>
-															<td>Pfc</td>
-															<td><?=$model->pfc?></td>
+															<td>Beam Angle</td>
+															<td><?=$model->angle ?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->cob_light_source) && !empty($model->cob_light_source) ) { ?>
 														<tr>
-															<td>Cutout</td>
-															<td><?=$model->cutout?></td>
+															<td>COB Light Source</td>
+															<td><?=$model->cob_light_source ?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->tj) && !empty($model->tj) ) { ?>
 														<tr>
-															<td>Angle</td>
-															<td><?=$model->angle?></td>
+															<td>TJ</td>
+															<td><?=$model->tj?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->protect_grade) && !empty($model->protect_grade) ) { ?>
 														<tr>
-															<td>LED Chip</td>
-															<td><?=$model->ledChip?></td>
+															<td>Protect Grade</td>
+															<td><?=$model->protect_grade?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->environemnt) && !empty($model->environemnt) ) { ?>
+														<tr>
+															<td>Working Environment</td>
+															<td><?=$model->environemnt?></td>
+														</tr>			
+														<?php } ?>
+														<?php if (isset($model->storage) && !empty($model->storage) ) { ?>
+														<tr>
+															<td>Storage Temp</td>
+															<td><?=$model->storage?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->lifespan) && !empty($model->lifespan) ) { ?>
+														<tr>
+															<td>Lifespan</td>
+															<td><?=$model->lifespan?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->material) && !empty($model->material) ) { ?>
+														<tr>
+															<td>Material</td>
+															<td><?=$model->material?></td>
+														</tr>
+														<?php } ?>
+														<?php if (isset($model->dimension) && !empty($model->dimension) ) { ?>
 														<tr>
 															<td>Dimension</td>
 															<td><?=$model->dimension?></td>
 														</tr>
+														<?php } ?>
+														<?php if (isset($model->luminous_lamp) && !empty($model->luminous_lamp) ) { ?>
+														<tr>
+															<td>Net Weight</td>
+															<td><?=$model->weight?></td>
+														</tr>
+														<?php } ?>
 													</tbody>
 												</table>
 

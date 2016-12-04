@@ -7,39 +7,60 @@ use common\components\Helpers;
 /* @var $this yii\web\View */
 /* @var $model common\models\Product */
 /* @var $form yii\widgets\ActiveForm */
-$dataCategoryBrand = ArrayHelper::map(\common\models\BrandType::find()->asArray()->all(), 'id', 'brandName');
+//$dataCategoryBrand = ArrayHelper::map(\common\models\BrandType::find()->asArray()->all(), 'id', 'brandName');
 $dataCategoryCategories = ArrayHelper::map(\common\models\Category::find()->asArray()->all(), 'id', 'name');
 ?>
 <div class="product-form">
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]);?>
 
-    <?=$form->field($model, 'brandTypeId')->dropDownList($dataCategoryBrand, ['prompt' => '--Choose a Brand--'])?>
+    <?php //$form->field($model, 'brandTypeId')->dropDownList($dataCategoryBrand, ['prompt' => '--Choose a Brand--'])?>
 
     <?=$form->field($model, 'categoryId')->dropDownList($dataCategoryCategories, ['prompt' => '--Choose a Category--'])?>    
-    <div id="tree">
-      <?= Helpers::categoryTreeBuild(); ?>
-    </div>
+    
     <?=$form->field($model, 'itemNo')->textInput(['maxlength' => true])?>
 
-    <?=$form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className())?>
+    <?=$form->field($model, 'name')->textInput()?>
+
+    <?=$form->field($model, 'description')->widget(\yii\redactor\widgets\Redactor::className())?>    
+
+    <?=$form->field($model, 'voltage')->textInput()?>
+
+    <?=$form->field($model, 'frequency')->textInput()?>    
 
     <?=$form->field($model, 'power')->textInput()?>
 
+    <?=$form->field($model, 'efficiency')->textInput()?>
+
+    <?=$form->field($model, 'consumption')->textInput()?>
+
+    <?=$form->field($model, 'consumption_lamp')->textInput()?>
+
     <?=$form->field($model, 'luminous')->textInput(['maxlength' => true])?>
 
-    <?=$form->field($model, 'cri')->textInput()?>
+    <?=$form->field($model, 'luminous_lamp')->textInput()?>
 
-    <?=$form->field($model, 'pfc')->textInput()?>
+    <?=$form->field($model, 'cri')->textInput()?>    
 
-    <?=$form->field($model, 'cutout')->textInput()?>
+    <?=$form->field($model, 'angle')->textInput()?>  
 
-    <?=$form->field($model, 'angle')->textInput()?>
+    <?=$form->field($model, 'cob_light_source')->textInput()?>  
 
-    <?=$form->field($model, 'ledChip')->textInput()?>
+    <?=$form->field($model, 'tj')->textInput()?>      
+
+    <?=$form->field($model, 'protect_grade')->textInput()?>      
+
+    <?=$form->field($model, 'environment')->textInput()?>  
+
+    <?=$form->field($model, 'storage')->textInput()?>  
+
+    <?=$form->field($model, 'lifespan')->textInput()?>  
+
+    <?=$form->field($model, 'material')->textInput()?>  
 
     <?=$form->field($model, 'dimension')->textInput()?>
 
+    <?=$form->field($model, 'weight')->textInput()?>  
 
     <?=$form->field($model, 'imageFile1')->fileInput()?>
 

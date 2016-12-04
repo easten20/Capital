@@ -9,15 +9,16 @@ use yii\helpers\Html;
 $this->title = 'About Us';
 $this->params['breadcrumbs'][] = $this->title;
 
+
 //seo meta tags
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Capital - Specialist in Architectural Lighting ',
+    'content' => 'Dongguan CLED Optoelectronic Technology Co., Ltd - LED street light, LED tunnel light, LED outdoor light, LED indoor light ',
 ]);
 
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => 'Lighting, Downlight, Indonesia, Architectural, Design',
+    'content' => 'LED street light, LED tunnel light, LED outdoor light, LED indoor light',
 ]);
 
 $this->registerMetaTag([

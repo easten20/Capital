@@ -20,7 +20,6 @@ use yii\web\UploadedFile;
  * @property string $pfc
  * @property string $cutout
  * @property string $angle
- * @property string $ledChip
  * @property string $width
  * @property string $length
  * @property string $image_1
@@ -55,18 +54,31 @@ class Product extends \yii\db\ActiveRecord {
 	 */
 	public function rules() {
 		return [
-			[['brandTypeId', 'categoryId', 'itemNo'], 'required'],
-			[['brandTypeId', 'categoryId'], 'integer'],
+			[[ 'categoryId', 'itemNo', 'name'], 'required'],
+			[['categoryId'], 'integer'],
 			[['pfc'], 'string', 'max' => 50],
 			[['power'], 'string', 'max' => 50],
+			[['voltage'], 'string', 'max' => 50],
 			[['cri'], 'string', 'max' => 50],
 			[['cutout'], 'string', 'max' => 50],
 			[['itemNo'], 'string', 'max' => 50],
 			[['dimension'], 'string', 'max' => 50],
 			[['luminous'], 'string', 'max' => 100],
-			[['angle'], 'string', 'max' => 50],
-			[['ledChip'], 'string', 'max' => 50],
+			[['angle'], 'string', 'max' => 50],			
 			[['description'], 'string'],
+			[['frequency'], 'string', 'max' => 512],
+			[['efficiency'], 'string', 'max' => 255],
+			[['consumption'], 'string', 'max' => 255],
+			[['consumption_lamp'], 'string', 'max' => 255],
+			[['luminous_lamp'], 'string', 'max' => 255],
+			[['cob_light_source'], 'string', 'max' => 255],
+			[['tj'], 'string', 'max' => 255],
+			[['protect_grade'], 'string', 'max' => 255],
+			[['environment'], 'string', 'max' => 255],
+			[['storage'], 'string', 'max' => 255],
+			[['lifespan'], 'string', 'max' => 255],
+			[['material'], 'string', 'max' => 255],			
+			[['weight'], 'integer'],
 			[['itemNo'], 'unique'],
 		];
 	}
@@ -76,19 +88,32 @@ class Product extends \yii\db\ActiveRecord {
 	 */
 	public function attributeLabels() {
 		return [
-			'id' => 'ID',
-			'brandTypeId' => 'Brand Type ID',
+			'id' => 'ID',			
 			'categoryId' => 'Category ID',
 			'itemNo' => 'Item No',
 			'power' => 'Power',
-			'luminous' => 'Luminous',
+			'luminous' => 'LED Luminous',
 			'cri' => 'Cri',
 			'pfc' => 'Pfc',
 			'cutout' => 'Cutout',
-			'angle' => 'Angle',
-			'ledChip' => 'Led Chip',
+			'angle' => 'Beam Angle',			
 			'dimension' => 'Dimension',
 			'description' => 'Description',
+			'name' => 'Name',
+			'frequency' => 'Frequency',		
+			'voltage' => 'Input Voltage',
+			'efficiency' => 'Power Efficiency',
+			'consumption_lamp' => 'Lamp Consumption',
+			'consumption' => 'LED Consumption',
+			'luminous_lamp' => 'Lamp Luminous',
+			'cob_light_source' => 'COB Light Source',			
+			'tj' => 'TJ',
+			'protect_grade' => 'Protect Grade',
+			'environment' => 'Working Environment',
+			'storage' => 'Storage Temp.',
+			'lifespan' => 'Lifespan',
+			'dimension' => 'Dimension (cm)',
+			'weight' => 'Net Weight',
 		];
 	}
 
@@ -97,13 +122,6 @@ class Product extends \yii\db\ActiveRecord {
 	 */
 	public function getCategory() {
 		return $this->hasOne(Category::className(), ['id' => 'categoryId']);
-	}
-
-	/**
-	 * @return \yii\db\ActiveQuery
-	 */
-	public function getBrandType() {
-		return $this->hasOne(BrandType::className(), ['id' => 'brandTypeId']);
 	}
 
 	/**

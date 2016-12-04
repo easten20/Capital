@@ -5,17 +5,17 @@ use yii\helpers\Url;
 use common\models\Page;
 use common\models\Cofounder;
 
-$this->title = 'Capital - Architectural lighting indonesia';
+$this->title = 'Dongguan CLED Optoelectronic Technology Co., Ltd - LED street light, LED tunnel light, LED outdoor light, LED indoor light';
 
 //seo meta tags
 $this->registerMetaTag([
     'name' => 'description',
-    'content' => 'Capital - Specialist in Architectural Lighting ',
+    'content' => 'Dongguan CLED Optoelectronic Technology Co., Ltd - LED street light, LED tunnel light, LED outdoor light, LED indoor light ',
 ]);
 
 $this->registerMetaTag([
     'name' => 'keywords',
-    'content' => 'Lighting, Downlight, Indonesia, Architectural, Design',
+    'content' => 'LED street light, LED tunnel light, LED outdoor light, LED indoor light',
 ]);
 
 $this->registerMetaTag([
@@ -264,22 +264,22 @@ Founder
         </div>
         <div class="oc-item">
             <a href="#">
-                <img alt="Clients" src="images/capital/client_logo/crematology.jpg"/>
+                <img alt="Clients" src="images/capital/client_logo/ce.png"/>
             </a>
         </div>
         <div class="oc-item">
             <a href="#">
-                <img alt="Clients" src="images/capital/client_logo/number8.png"/>
+                <img alt="Clients" src="images/capital/client_logo/environmental.png"/>
             </a>
         </div>
         <div class="oc-item">
             <a href="#">
-                <img alt="Clients" src="images/capital/client_logo/prodotti_logo.png"/>
+                <img alt="Clients" src="images/capital/client_logo/iso.png"/>
             </a>
         </div>
         <div class="oc-item">
             <a href="#">
-                <img alt="Clients" src="images/capital/client_logo/zenbu.png"/>
+                <img alt="Clients" src="images/capital/client_logo/waltek.png"/>
             </a>
         </div>
     </div>

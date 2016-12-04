@@ -26,7 +26,7 @@
                     ['label' => 'Portfolio', 'icon' => 'fa fa-circle-o',  'url' => ['/portfolio/index']],
                     ['label' => 'Page', 'icon' => 'fa fa-circle-o', 'url' => ['/page/index']],
                     ['label' => 'Contact', 'icon' => 'fa fa-circle-o', 'url' => ['/contact/index']],
-                    ['label' => 'Category', 'icon' => 'fa fa-circle-o', 'url' => ['/category/index']],
+                    ['label' => 'Category', 'icon' => 'fa fa-circle-o', 'url' => ['/category/tree']],
                     ['label' => 'Cofounder', 'icon' => 'fa fa-circle-o', 'url' => ['/cofounder/index']],
                     ['label' => 'ChangePassword', 'icon' => 'fa fa-circle-o', 'url' => ['/site/change-password']],
                 ];

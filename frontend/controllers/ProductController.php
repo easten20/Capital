@@ -9,7 +9,8 @@ use Yii;
 use yii\filters\VerbFilter;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
-
+use yii\base\Model;
+use yii\data\ActiveDataProvider;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
@@ -28,34 +29,46 @@ class ProductController extends Controller {
 	 * @return mixed
 	 */
 	public function actionIndex() {
+
 		$this->layout = 'default';
 
 		$searchModel = new ProductSearch();
 
 		$params = Yii::$app->request->queryParams;
+		$categoryId = null;
+		$query = Product::find();
 
-		//unset Category
-		if (isset($params["ProductSearch"]["categoryId"])) {
-			$categoryId = $params["ProductSearch"]["categoryId"];
-			unset($params["ProductSearch"]["categoryId"]);
-
-			//build query for the data provider
-			$subQuery = Category::find()->select('id')->where(['=', 'id', $categoryId]);
-			$query = Category::find()->select('id')->where(['in', 'parentId', $subQuery]);
-			$query = $query->OrFilterWhere(['=', 'id', $categoryId]); //add its own category
+		$dataProvider = new ActiveDataProvider([
+			'query' => $query,
+		]);		
+		$dataProvider->pagination = array('pageSize' => 9, 'route' => 'product');				
+		
+		if (isset($params['category']) && !empty($params['category'])) {
+			$array_categoryId=array();
+			$subCategories = Category::find()->where(['=', 'lvl', $params['category']])->all();					
+			foreach($subCategories as $category) {
+				array_push($array_categoryId,$category->id);
+			}
+			//var_dump($array_categoryId);
+			$dataProvider->query->andFilterWhere(['in', 'categoryId', $array_categoryId]);
+		}
+		else {
+			$subCategories = Category::find()->all();
+		}
+		if (isset($params['subcategory']) && !empty($params['subcategory'])) {
+			$dataProvider->query->andFilterWhere(['=', 'categoryId', $params['subcategory']]);	
 		}
 
-		$dataProvider = $searchModel->search($params);
-		$dataProvider->pagination = array('pageSize' => 9, 'route' => 'product');
-		if (isset($query)) {
-			$dataProvider->query->andFilterWhere(['in', 'categoryId', $query]);
+		if (isset($params['name']) && !empty($params['name'])) {
+			$dataProvider->query->andFilterWhere(['like', 'itemNo', $params['name']]);	
 		}
 
 		return $this->render('index', [
 			'searchModel' => $searchModel,
 			'dataProvider' => $dataProvider,
+			'categoryId' => $categoryId,
+			'subCategories' => $subCategories
 		]);
-
 	}
 
 	/**
@@ -64,7 +77,7 @@ class ProductController extends Controller {
 	 * @return mixed
 	 */
 	public function actionView($itemNo = "") {
-		$this->layout = 'default';
+		$this->layout = 'default';		
 		return $this->render('view', [
 			'model' => $this->findModelByItemNo($itemNo),
 		]);
